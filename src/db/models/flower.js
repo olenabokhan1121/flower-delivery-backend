@@ -1,9 +1,10 @@
 import { Schema, model } from 'mongoose';
-import { getEnvVar } from './utils/getEnvVar.js';
+import { getEnvVar } from '../../utils/getEnvVar.js';
 const flowerSchema = new Schema(
   {
     shopId: {
       type: Schema.Types.ObjectId,
+      ref: 'shop',
       required: true,
     },
     name: String,
@@ -15,10 +16,6 @@ const flowerSchema = new Schema(
     },
     quantity: Number,
     category: String,
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
   },
   {
     timestamps: true,

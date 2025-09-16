@@ -9,22 +9,42 @@ const orderSchema = new Schema(
       {
         flowerId: {
           type: Schema.Types.ObjectId,
-          ref: 'Flower',
+          ref: 'flower',
+          required: true,
         },
-        name: String,
-        quantity: Number,
+        name: {
+          type: String,
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+          min: [1, 'Quantity must be at least 1'],
+        },
       },
     ],
-    totalPrice: Number,
-    customer: {
-      name: String,
-      phone: String,
-      email: String,
-      address: String,
+    totalPrice: {
+      type: Number,
+      required: true,
+      min: [0, 'Total price cannot be negative'],
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+    customer: {
+      name: {
+        type: String,
+        required: true,
+      },
+      phone: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      address: {
+        type: String,
+        required: true,
+      },
     },
   },
   {

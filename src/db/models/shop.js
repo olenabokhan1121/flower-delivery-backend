@@ -7,10 +7,6 @@ const shopSchema = new Schema(
     phone: String,
     email: String,
     description: String,
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
   },
   {
     timestamps: true,
