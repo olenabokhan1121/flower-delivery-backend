@@ -44,3 +44,5 @@ export const getAllFlowersController = async (req, res) => {
     data: { enrichedFlowers, ...paginationData },
   });
 };
+export const addFlowerToFavoritesController = async (req, res) => {};
+export const deleteFlowerToFavoritesController = async (req, res) => {};
