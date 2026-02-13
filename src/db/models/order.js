@@ -1,3 +1,4 @@
+import { required } from 'joi';
 import { Schema, model } from 'mongoose';
 const orderSchema = new Schema(
   {
@@ -29,6 +30,10 @@ const orderSchema = new Schema(
       min: [0, 'Total price cannot be negative'],
     },
     customer: {
+      clientId: {
+        type: String,
+        required: true,
+      },
       name: {
         type: String,
         required: true,
