@@ -1,6 +1,6 @@
 import { FlowerCollection } from '../db/models/flower.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
-
+import { FavoriteCollection } from '../db/models/favorites.js';
 export const getShopsFlowers = async ({
   page,
   perPage,
@@ -27,8 +27,22 @@ export const getShopsFlowers = async ({
   };
 };
 
-export const getAllFlowers = async ({ page, perPage, sortBy, sortOrder }) => {
+export const getAllFlowers = async ({
+  page,
+  perPage,
+  sortBy,
+  sortOrder,
+  clientId,
+}) => {
   let skip = (page - 1) * perPage;
+  let favoriteObjectIds = [];
+  if (clientId) {
+    const favorites = await FavoriteCollection.findOne({ clientId });
+
+    if (favorites?.favoriteFlowers?.length) {
+      favoriteObjectIds = favorites.favoriteFlowers;
+    }
+  }
   const flowersCount = await FlowerCollection.countDocuments();
   const paginationsFlowers = await FlowerCollection.find()
     .skip(skip)
