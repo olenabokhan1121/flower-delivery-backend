@@ -11,6 +11,10 @@ const router = Router();
 
 router.get('/', ctrlWrapper(getAllFlowersController));
 
-router.get('/:shopId', isValidId, ctrlWrapper(getShopsFlowersController));
+router.get(
+  '/:shopId',
+  isValidId('shopId'),
+  ctrlWrapper(getShopsFlowersController),
+);
 
 export default router;

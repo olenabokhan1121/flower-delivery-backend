@@ -2,7 +2,7 @@ import { addToFavorites, removeFromFavorites } from '../services/favorites.js';
 
 export const deleteFlowerToFavoritesController = async (req, res) => {
   const { flowerId } = req.params;
-  const { clientId } = req.cookies;
+  const { clientId } = req;
   const user = await removeFromFavorites(clientId, flowerId);
 
   res.status(200).json({
@@ -14,7 +14,7 @@ export const deleteFlowerToFavoritesController = async (req, res) => {
 
 export const addFlowerToFavoritesController = async (req, res) => {
   const { flowerId } = req.params;
-  const { clientId } = req.cookies;
+  const { clientId } = req;
 
   const updatedUser = await addToFavorites(clientId, flowerId);
   if (!updatedUser) {

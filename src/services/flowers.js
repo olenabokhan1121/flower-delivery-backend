@@ -32,7 +32,7 @@ export const getShopsFlowers = async ({
     {
       $sort: {
         isFavorite: -1,
-        [sortBy]: sortOrder,
+        [sortBy]: sortOrder === 'asc' ? 1 : -1,
       },
     },
     { $skip: skip },
@@ -75,7 +75,7 @@ export const getAllFlowers = async ({
     {
       $sort: {
         isFavorite: -1,
-        [sortBy]: sortOrder,
+        [sortBy]: sortOrder === 'asc' ? 1 : -1,
       },
     },
     { $skip: skip },

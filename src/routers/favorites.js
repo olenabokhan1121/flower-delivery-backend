@@ -9,13 +9,13 @@ import { isValidId } from '../middlewares/isValidId.js';
 const router = Router();
 router.post(
   '/:flowerId',
-  isValidId,
+  isValidId('flowerId'),
   ctrlWrapper(addFlowerToFavoritesController),
 );
 
 router.delete(
   '/:flowerId',
-  isValidId,
+  isValidId('flowerId'),
   ctrlWrapper(deleteFlowerToFavoritesController),
 );
 

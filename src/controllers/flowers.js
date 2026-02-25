@@ -37,7 +37,7 @@ export const getAllFlowersController = async (req, res) => {
   });
 
   const enrichedFlowers = flowers.map((flower) => ({
-    ...flower.toObject(),
+    ...flower,
   }));
 
   res.status(200).json({
