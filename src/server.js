@@ -13,7 +13,12 @@ export default function setupServer() {
   const app = express();
   app.use(express.json());
   app.use(pino({ transport: { target: 'pino-pretty' } }));
-  app.use(cors());
+  app.use(
+    cors({
+      origin: getEnvVar('FRONTEND_URL'), // для отримання кукі
+      credentials: true,
+    }),
+  );
   app.use(cookieParser());
   app.use(assignUserId);
 
