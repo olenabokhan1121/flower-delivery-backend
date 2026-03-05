@@ -15,7 +15,18 @@ export default function setupServer() {
   app.use(pino({ transport: { target: 'pino-pretty' } }));
   app.use(
     cors({
-      origin: getEnvVar('FRONTEND_URL'), // для отримання кукі
+      origin: function (origin, callback) {
+        const allowedOrigins = [
+          getEnvVar('FRONTEND_URL'), // для отримання кукі від фронта
+          getEnvVar('LOCAL_URL'),
+        ];
+
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
       credentials: true,
     }),
   );
