@@ -10,29 +10,12 @@ export const assignUserId = (req, res, next) => {
   res.cookie('clientId', id, {
     maxAge: ONE_YEAR,
     httpOnly: true,
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'none',
+    secure: true,
+    //sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    //secure: process.env.NODE_ENV === 'production',
   });
   req.clientId = id;
 
   next();
 };
-/*export const assignUserId = (req, res, next) => {
-  // Якщо користувач вже має userId, нічого робити не потрібно
-  if (req.cookies.userId) {
-    req.userId = req.cookies.userId;
-    return next();
-  }
-  // Якщо userId немає, перевіряємо guestId
-  if (!req.cookies.guestId) {
-    const guestId = uuidv4();
-    res.cookie('guestId', guestId, {
-      maxAge: ONE_YEAR,
-      httpOnly: true,
-    });
-    req.guestId = guestId;
-  } else {
-    req.guestId = req.cookies.guestId;
-  }
-  next();
-};*/
