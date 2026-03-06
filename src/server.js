@@ -12,7 +12,15 @@ dotenv.config();
 export default function setupServer() {
   const app = express();
   app.use(express.json());
-  app.use(pino({ transport: { target: 'pino-pretty' } }));
+  app.use(
+    pino({
+      transport:
+        process.env.NODE_ENV === 'development'
+          ? { target: 'pino-pretty' }
+          : undefined,
+    }),
+  );
+  //app.use(pino({ transport: { target: 'pino-pretty' } }));
   app.use(
     cors({
       origin: function (origin, callback) {
