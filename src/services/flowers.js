@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { FlowerCollection } from '../db/models/flower.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { FavoriteCollection } from '../db/models/favorites.js';
@@ -22,7 +23,7 @@ export const getShopsFlowers = async ({
 
   const paginationsFlowers = await FlowerCollection.aggregate([
     {
-      $match: { shopId: id },
+      $match: { shopId: new Types.ObjectId(id) },
     },
     {
       $addFields: {
