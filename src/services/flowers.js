@@ -19,11 +19,15 @@ export const getShopsFlowers = async ({
       favoriteObjectIds = favorites.favoriteFlowers;
     }
   }
-  const flowersCount = await FlowerCollection.countDocuments({ shopId: id });
+  const shopObjectId = new Types.ObjectId(id);
+
+  const flowersCount = await FlowerCollection.countDocuments({
+    shopId: shopObjectId,
+  });
 
   const paginationsFlowers = await FlowerCollection.aggregate([
     {
-      $match: { shopId: new Types.ObjectId(id) },
+      $match: { shopId: shopObjectId },
     },
     {
       $addFields: {
