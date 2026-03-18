@@ -10,6 +10,7 @@ export const getShopsFlowers = async ({
   id,
   clientId,
 }) => {
+  const safeSortBy = sortBy || 'createdAt';
   let skip = (page - 1) * perPage;
   let favoriteObjectIds = [];
   if (clientId) {
@@ -27,7 +28,9 @@ export const getShopsFlowers = async ({
 
   const paginationsFlowers = await FlowerCollection.aggregate([
     {
-      $match: { shopId: shopObjectId },
+      $match: {
+        shopId: shopObjectId,
+      },
     },
     {
       $addFields: {
@@ -37,7 +40,7 @@ export const getShopsFlowers = async ({
     {
       $sort: {
         isFavorite: -1,
-        [sortBy]: sortOrder === 'asc' ? 1 : -1,
+        [safeSortBy]: sortOrder === 'asc' ? 1 : -1,
       },
     },
     { $skip: skip },
