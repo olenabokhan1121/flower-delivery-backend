@@ -10,18 +10,18 @@ export const getShopsFlowers = async ({
   id,
   clientId,
 }) => {
-  const safeSortBy = sortBy || 'createdAt';
   let skip = (page - 1) * perPage;
   let favoriteObjectIds = [];
   if (clientId) {
     const favorites = await FavoriteCollection.findOne({ clientId });
-
     if (favorites?.favoriteFlowers?.length) {
-      favoriteObjectIds = favorites.favoriteFlowers;
+      favoriteObjectIds = favorites.favoriteFlowers.map(
+        (id) => new Types.ObjectId(id),
+      );
     }
   }
   const shopObjectId = new Types.ObjectId(id);
-
+  console.log(shopObjectId);
   const flowersCount = await FlowerCollection.countDocuments({
     shopId: shopObjectId,
   });
@@ -40,7 +40,7 @@ export const getShopsFlowers = async ({
     {
       $sort: {
         isFavorite: -1,
-        [safeSortBy]: sortOrder === 'asc' ? 1 : -1,
+        [sortBy]: sortOrder === 'asc' ? 1 : -1,
       },
     },
     { $skip: skip },
