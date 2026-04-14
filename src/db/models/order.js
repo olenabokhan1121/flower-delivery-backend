@@ -33,6 +33,7 @@ const orderSchema = new Schema(
       clientId: {
         type: String,
         required: true,
+        index: true, //швидкий пошук
       },
       name: {
         type: String,

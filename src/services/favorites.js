@@ -21,6 +21,7 @@ export const removeFromFavorites = async (clientId, flowerId) => {
     { $pull: { favoriteFlowers: flowerId } },
     { new: true },
   );
+
   if (!user) {
     throw createHttpError(404, 'Flower not found');
   }
