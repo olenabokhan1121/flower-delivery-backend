@@ -1,15 +1,16 @@
 import { Schema, model } from 'mongoose';
 const orderSchema = new Schema(
   {
-    shopId: {
-      type: Schema.Types.ObjectId,
-      required: true,
-    },
     items: [
       {
         flowerId: {
           type: Schema.Types.ObjectId,
           ref: 'flower',
+          required: true,
+        },
+        shopId: {
+          type: Schema.Types.ObjectId,
+          ref: 'shop',
           required: true,
         },
         name: {

@@ -21,7 +21,7 @@ export const getShopsFlowers = async ({
     }
   }
   const shopObjectId = new Types.ObjectId(id);
-  console.log(shopObjectId);
+
   const flowersCount = await FlowerCollection.countDocuments({
     shopId: shopObjectId,
   });
