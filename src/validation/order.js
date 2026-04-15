@@ -1,10 +1,10 @@
 import Joi from 'joi';
 
 export const orderValidationSchema = Joi.object({
-  shopId: Joi.string().required(),
   items: Joi.array().items(
     Joi.object({
       flowerId: Joi.string().required(),
+      shopId: Joi.string().required(),
       name: Joi.string().min(2).max(100).required(),
       quantity: Joi.number().min(1).required(),
     }),
